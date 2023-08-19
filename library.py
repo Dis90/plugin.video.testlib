@@ -27,6 +27,7 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
+import xbmcvfs
 
 ADDON = xbmcaddon.Addon()
 
@@ -68,7 +69,7 @@ tag_mappings = {
     'sortepisode':      'displayepisode'
 }
 
-def log(msg, lvl=xbmc.LOGNOTICE):
+def log(msg, lvl=xbmc.LOGDEBUG):
     xbmc.log('[plugin.video.testlib]: {0}'.format(msg), lvl)
 
 def enc(s):
@@ -161,7 +162,7 @@ def load_tvshow(xml):
     return ret
 
 def get_path(pathtype, fn):
-    path = xbmc.translatePath(ADDON.getAddonInfo(pathtype))
+    path = xbmcvfs.translatePath(ADDON.getAddonInfo(pathtype))
     try:
         return os.path.join(path.decode('utf-8'), fn.decode('utf-8'))
     except AttributeError:
